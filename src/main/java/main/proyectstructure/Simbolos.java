@@ -25,12 +25,11 @@ public class Simbolos {
 
             return contenido;
         } catch (IOException ex) {
-            System.err.println("Ha ocurrido un error al Leer");
             ex.printStackTrace(System.out);
         }
         return contenido;
     }
-
+//Simbolos y valores de las cartas
     public static String remplazarSimbolos(String entrada) {
         entrada = entrada.replace("â£", "♣");
         entrada = entrada.replace("â¥", "♥");

@@ -21,7 +21,7 @@ public class Arbol {
         this.raiz = null;
     }
     
-    //Buscar
+    //Busca dentro del Arbol
     public Nodo buscar(Carta carta, Nodo raiz) {
         if (raiz == null) {
             return null;
@@ -34,6 +34,7 @@ public class Arbol {
         }
     }
 
+//Elimina o mas bien verifica si se puede eliminar un nodo co hija, caso contrario lo deja asi
     private Nodo eliminarNodoHoja(Carta carta, Nodo raiz, Nodo padre, boolean derecha) {
         Nodo nuevaRaiz = raiz;
         if (raiz == null) {
@@ -75,7 +76,7 @@ public class Arbol {
         }
         return nuevaRaiz;
     }
-
+//Eliminar
     public void eliminar(Carta carta, Nodo raiz) {
         this.raiz = eliminarNodoHoja(carta, raiz, raiz, true);
     }
@@ -176,7 +177,7 @@ public class Arbol {
         return nuevaRaiz;
     }
 
-    //Insertar
+    //Insertar carta
     public void insertar(Carta carta, HttpServletResponse response) {
         Nodo nuevo = new Nodo(carta);
         if (raiz == null) {
@@ -186,7 +187,7 @@ public class Arbol {
         }
     }
 
-    //Recorridos
+    //Mantioene el control de los recorridos
     private void inOrden(Nodo nodo, ArrayList<String> cartas) {
         if (nodo != null) {
             inOrden(nodo.getHijoIzquierdo(), cartas);
@@ -210,7 +211,7 @@ public class Arbol {
             cartas.add(nodo.getCarta().toString());
         }
     }
-
+//Verficia el nivel que se encuentra los nodos
     public ArrayList<String> getNivel(int nivel) {
         ArrayList<String> cartas = new ArrayList<>();
         this.getNivel(this.raiz, cartas, nivel);
