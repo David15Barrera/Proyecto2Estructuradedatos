@@ -31,6 +31,7 @@ public class Eliminar {
         this.response = response;
     }
 
+    //Elimina las cartas en el orden que les corresponde
     public void eliminarCartas() {
         Arbol arbol = LlamadasArbol.getArbol();
         try {
@@ -51,43 +52,36 @@ public class Eliminar {
                         System.out.println(c);
                     }
 
-                    System.out.println("Analisis del JsonDelete correcto.");
                 } else {
-                    System.out.println("Existen errores sintacticos en JsonDelete");
                     response.setStatus(400);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace(System.out);
-                System.out.println("Ocurrieron errores al analizar el JsonDelete");
                 response.setStatus(400);
             }
 
         } catch (IOException ex) {
-            System.out.println("Error al leer jsonDelete");
             response.setStatus(400);
         }
     }
-
+//Verifica si las cartas no tienen hijos
     private void eliminarCarta(Carta carta, Arbol arbol) {
         if (arbol.buscar(carta, arbol.getRaiz()) != null) {
             if (!arbol.tieneHijos(carta, arbol.getRaiz())) {
                 arbol.eliminar(carta, arbol.getRaiz());
             } else {
-                System.out.println("No se puede eliminar tiene hijos");
                 response.setStatus(409);
             }
         } else {
-            System.out.println("La carta no existe en el arbol");
             response.setStatus(404);
         }
     }
-
+//Eliminacion de cartas y verifica que las que no suman 13
     private void eliminarCartas(ArrayList<Carta> cartas, Arbol arbol) {
         boolean valido;
         int cantidadCartas = cartas.size();
         switch (cantidadCartas) {
             case 0:
-                System.out.println("No hay cartas.");
                 response.setStatus(400);
                 break;
             case 1: {
@@ -96,7 +90,6 @@ public class Eliminar {
                 if (valido) {
                     eliminarCarta(primeraCarta, arbol);
                 } else {
-                    System.out.println("Las cartas no suman trece");
                     response.setStatus(406);
                 }
             }
@@ -109,7 +102,6 @@ public class Eliminar {
                     eliminarCarta(primeraCarta, arbol);
                     eliminarCarta(segundaCarta, arbol);
                 } else {
-                    System.out.println("Las cartas no suman trece");
                     response.setStatus(406);
                 }
             }

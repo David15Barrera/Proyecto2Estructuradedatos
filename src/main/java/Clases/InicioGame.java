@@ -46,24 +46,21 @@ public class InicioGame {
                     for (Carta carta : nodos) {
                         arbol.insertar(carta, response);
                     }
-                    
-                    
+//Analisis Correcto                    
                     ArrayList<String> cartasS = arbol.preOrden();
                     for (String c : cartasS) {
                         System.out.println(c);
                     }
-                    System.out.println("Analisis correcto");
+//Errores sintacticos en el inicio del Json
                 }else{
-                    System.out.println("Existen errores sintacticos en JsonStart");
                     response.setStatus(400);
                 }
             } catch (Exception ex) {
-                System.out.println("Ocurrieron errores al analizar JsonStart");
+//Errores en la lectura del analizador
                 response.setStatus(400);
             }
 
         } catch (IOException ex) {
-            System.out.println("Error al leer jsonStart");
             response.setStatus(400);
         }
 
